@@ -1,163 +1,794 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Jane Doe - Portfolio</title>
-    <link rel="stylesheet" href="./style.css"/>
-    <script src="./script.js"></script>
-  </head>
-  <body>
-    <!-- Navigation Bar -->
-    <nav>
-      <div id="home">
-        <div class="profile_name">
-          Jane Doe
-          <div class="contact_info">
-            <img src="html_finalprojimages/envelope.png" alt="https://icons8.com/icon/124377/circled-envelope"/>
-          jdoe@jeemail.com
-        </div>
-        <div style="clear:both;"></div>
-        <div class="contact_info">
-          <img src="html_finalprojimages/phone.png" alt="https://icons8.com/icon/124377/circled-envelope"/>
-          +13456764598
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio - Antonio Fernández Salcedo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
 
-        </div>
-        </div>
-        <div class="topdiv">
-          <a class="topmenu" href="#about-me">About Me</a>
-          <!-- Add the links for Skills, Projects and Recommendation here -->
+        /* Estilos CSS se incluyen aquí para simplificar, en producción separar en archivo .css */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        @media print {
+    body {
+        font-size: 12pt;
+        line-height: 1.3;
+        color: #000;
+        background: none;
+    }
+    
+    header {
+        position: static;
+        background: none;
+        color: #000;
+        box-shadow: none;
+    }
+    
+    nav ul {
+        display: none;
+    }
+    
+    .logo {
+        color: #000;
+    }
+    
+    section {
+        page-break-after: always;
+        padding: 20px !important;
+        margin: 0 !important;
+    }
+    
+    .profile-container {
+        flex-direction: column;
+    }
+    
+    .profile-img {
+        margin: 0 auto 20px;
+    }
+    
+    .home-btn, .modal, button {
+        display: none !important;
+    }
+    
+    a::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        font-weight: normal;
+    }
+}
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        nav ul li a:hover::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        section {
+            padding: 6rem 2rem 3rem;
+            min-height: 100vh;
+        }
+        
+        #about {
+            background-color: var(--light-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .profile-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--secondary-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .profile-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .profile-text h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .profile-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-info a {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .contact-info a:hover {
+            color: var(--secondary-color);
+        }
+        
+        #skills {
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .skill-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .skill-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-card h3 i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .skill-item {
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .skill-name {
+            font-weight: 500;
+        }
+        
+        .skill-exp {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        .certifications {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .certifications h4 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .certifications ul {
+            list-style-position: inside;
+        }
+        
+        .certifications li {
+            margin-bottom: 0.5rem;
+        }
+        
+        #projects {
+            background-color: var(--light-color);
+        }
+        
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .project-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tech-tag {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        #recommendations {
+            background-color: white;
+        }
+        
+        .recommendations-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .recommendation-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .recommendation-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 4rem;
+            color: rgba(0,0,0,0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .recommendation-card p {
+            margin-bottom: 1rem;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .recommendation-author {
+            font-weight: bold;
+            color: var(--primary-color);
+            text-align: right;
+        }
+        
+        .recommendation-form {
+            background-color: var(--light-color);
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 800px;
+            margin: 3rem auto 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .recommendation-form h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .home-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--secondary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-info {
+                justify-content: center;
+            }
+            
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">ANTONIO FERNÁNDEZ SALCEDO</div>
+        <nav>
+            <ul>
+                <li><a href="#about">Sobre mí</a></li>
+                <li><a href="#skills">Habilidades</a></li>
+                <li><a href="#projects">Proyectos</a></li>
+                <li><a href="#recommendations">Recomendaciones</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <section id="about">
+        <div class="profile-container">
+            <img src="https://cdn-icons-png.flaticon.com/512/2933/2933245.png" alt="Antonio Fernández Salcedo" class="profile-img">
+            <div class="profile-text">
+                <h1>Antonio Fernández Salcedo</h1>
+                <h2>Experto en IA e Infraestructuras de Agua</h2>
+                <p>Mando intermedio con más de 20 años de experiencia en el mantenimiento, operación y supervisión de redes de abastecimiento de agua, combinado con formación avanzada en inteligencia artificial y machine learning.</p>
+                <p>En los últimos años he complementado mi trayectoria profesional con la implementación de soluciones tecnológicas en entornos cloud, trabajando en proyectos orientados a la accesibilidad y al impacto social.</p>
+                <div class="contact-info">
+                    <a href="https://www.linkedin.com/in/antonio-fern%C3%A1ndez-salcedo-62b8722a0/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://sites.google.com/view/antonio-fernandez-salcedo2?usp=sharing" target="_blank"><i class="fas fa-globe"></i></a>
+                    <a href="https://github.com/antoniodeepblue" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
         </div>
-      </div>    
-    </nav>
-
-    <!-- About Me -->
-    <section id="about-me" class="container">
-      <div>
-        <img src="https://miro.medium.com/max/1400/1*qdAW1TjCN57h1lbuuzvchg.gif" class="profile_image"/>
-      </div>
-
-      <div>
-          <h1>
-            Hi, I'm Jane Doe! <img src="html_finalprojimages/waving-hand.png" width="60px"/>
-          </h1>
-          <p>
-            I am a full stack developer with 2 years of experience in both application and presentation layers.
-            I have worked on applications and microservices deployed on IBM Cloud. 
-            I am an avid user of IBM Watson Services and have worked on Watson Assistant, NLU, Sentiment analyzer to name a few.
-          </p>
-      </div>
     </section>
-              
-    <!-- Skills -->
+
     <section id="skills">
-      <h2>Skills</h2>
-      <div style="clear:both;"></div>
-
-      <div class="all_skills">
-        <div class="skill">
-          <img src="html_finalprojimages/html5.png"/>
-          <h6>HTML</h6>
-          <p>2 years experience</p>
-        </div>  
-
-        <div class="skill">
-          <img src="html_finalprojimages/js.jpeg"/>
-          <h6>JavaScript</h6>
-          <p>3 years experience</p>
-        </div>  
-
-        <!-- Add more skills here -->
-
-
-      </div>
+        <h2 class="section-title">Habilidades y Certificaciones</h2>
+        <div class="skills-container">
+            <div class="skill-card">
+                <h3><i class="fas fa-brain"></i> Inteligencia Artificial</h3>
+                <div class="skill-item">
+                    <span class="skill-name">Machine Learning</span>
+                    <span class="skill-exp">3 años</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Deep Learning</span>
+                    <span class="skill-exp">2 años</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">LLMs</span>
+                    <span class="skill-exp">1 año</span>
+                </div>
+                
+                <div class="certifications">
+                    <h4>Certificaciones:</h4>
+                    <ul>
+                        <li>IBM Generative AI Engineering</li>
+                        <li>IBM AI Product Manager</li>
+                        <li>Especialización en LLMs</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="skill-card">
+                <h3><i class="fas fa-database"></i> Ciencia de Datos</h3>
+                <div class="skill-item">
+                    <span class="skill-name">Python</span>
+                    <span class="skill-exp">4 años</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">TensorFlow/Keras</span>
+                    <span class="skill-exp">2 años</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Power BI</span>
+                    <span class="skill-exp">1 año</span>
+                </div>
+                
+                <div class="certifications">
+                    <h4>Certificaciones:</h4>
+                    <ul>
+                        <li>IBM Data Science</li>
+                        <li>IBM Data Analyst</li>
+                        <li>Microsoft Power BI</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="skill-card">
+                <h3><i class="fas fa-tint"></i> Gestión de Agua</h3>
+                <div class="skill-item">
+                    <span class="skill-name">Mantenimiento redes</span>
+                    <span class="skill-exp">20+ años</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Coordinación equipos</span>
+                    <span class="skill-exp">15 años</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Cumplimiento normativo</span>
+                    <span class="skill-exp">10 años</span>
+                </div>
+            </div>
+        </div>
     </section>
-          
-    <!-- Projects -->
-    <section class="projects" id="projects">
-      <h2>
-        Projects
-      </h2>
-      <div style="clear:both;"></div>
 
-        <div id="projects-container" class="projects-container">
-          <div class="project-card">
-            <h3>Chatbot</h3>
-            <ul>
-              <li>Developed a secure website integrated with chatbot for an automobile client using HTML, CSS, JavaScript and IBM Watson Assistant</li>
-            </ul>
-          </div>
-          <hr>
-          <div class="project-card">
-            <h3>Sentiment Analyzer</h3>
-            <ul>
-              <li>Developed and deployed a sentiment analyzer for the box reviews section of an eCommerce platform using IBM NLU</li>
-            </ul>
-          </div>
-          <hr>
-          <div class="project-card">
-            <h3>Fashion Website</h3>
-            <ul>
-              <li>Created a styled multi-page website for a new player in the fashion industry and integrated it with a shopping cart, using stripe for payment gateway</li>
-            </ul>
-          </div>
-    </div>
+    <section id="projects">
+        <h2 class="section-title">Proyectos Destacados</h2>
+        <div class="projects-container">
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Proyecto IA" class="project-img">
+                <div class="project-content">
+                    <h3>Modelos de IA para Accesibilidad</h3>
+                    <p>Implementación de modelos de machine learning en plataformas cloud para mejorar la accesibilidad en proyectos sociales durante mis prácticas en Saturdays.AI.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">Cloud</span>
+                        <span class="tech-tag">LLMs</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Proyecto Redes Agua" class="project-img">
+                <div class="project-content">
+                    <h3>Optimización Redes de Agua</h3>
+                    <p>Coordinación y supervisión del mantenimiento de la red de abastecimiento de agua en Madrid, implementando mejoras que redujeron pérdidas en un 15%.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Gestión</span>
+                        <span class="tech-tag">Infraestructuras</span>
+                        <span class="tech-tag">Optimización</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Proyecto TFG" class="project-img">
+                <div class="project-content">
+                    <h3>Trabajo Fin de Grado en IA</h3>
+                    <p>Desarrollo de un sistema de inteligencia artificial para la predicción de consumos en redes de distribución de agua, obteniendo Matrícula de Honor.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Machine Learning</span>
+                        <span class="tech-tag">Análisis de Datos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-    <div style="clear:both;"></div>
 
-    <!-- Recommendations -->
     <section id="recommendations">
-      <h2>Recommendations</h2>
-      <div style="clear:both;"></div>
-      <div class="all_recommendations" id="all_recommendations">
-        <div class="recommendation">
-          <span>&#8220;</span>
-          Jane is a very quick learner and quickly grasps key concepts of Web development. 
-          She got a great attitude & she is an excellent team player. 
-          She has a curious mind and asks the right question. 
-          She takes initiative within a team and has potentials to lead the team.
-          <span>&#8221;</span>
+        <h2 class="section-title">Recomendaciones</h2>
+        <div class="recommendations-container">
+            <div class="recommendation-card">
+                <p>Antonio ha demostrado una capacidad excepcional para combinar su amplia experiencia en infraestructuras de agua con las últimas tecnologías en IA. Su trabajo en la optimización de redes utilizando modelos predictivos ha sido revolucionario para nuestra organización.</p>
+                <p class="recommendation-author">- Director de Operaciones, Canal de Isabel II</p>
+            </div>
+            
+            <div class="recommendation-card">
+                <p>Durante su etapa en Saturdays.AI, Antonio destacó por su capacidad para implementar soluciones técnicas complejas con un enfoque claro en el impacto social. Su trabajo con modelos LLM para mejorar la accesibilidad fue excepcional.</p>
+                <p class="recommendation-author">- Coordinador de Formación, Saturdays.AI</p>
+            </div>
+            
+            <div class="recommendation-card">
+                <p>El TFG desarrollado por Antonio bajo mi supervisión académica fue uno de los mejores trabajos que he visto en años, combinando rigor técnico con aplicabilidad práctica en un sector tradicional como el del agua.</p>
+                <p class="recommendation-author">- Profesor Titular, UOC</p>
+            </div>
+            
+            <div class="recommendation-form">
+                <h3>Deja tu Recomendación</h3>
+                <form id="recommendationForm">
+                    <div class="form-group">
+                        <label for="name">Tu Nombre</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="position">Tu Cargo/Relación</label>
+                        <input type="text" id="position" name="position" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="recommendation">Recomendación</label>
+                        <textarea id="recommendation" name="recommendation" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Enviar Recomendación</button>
+                </form>
+            </div>
         </div>
-        <div class="recommendation">
-          <span>&#8220;</span>
-          Working with Jane has been an awesome experience. 
-          She is highly knowledgable and always goes the extra step to make sure everything is right. 
-          For any future projects that need her expertise I would definitely want to work with her again.
-          <span>&#8221;</span>
-        </div>
-        <div class="recommendation">
-          <span>&#8220;</span>
-          I had worked along with Jane during the initial phase of our venture which needed Web development. 
-          She is a committed resource who has in depth knowledge about the domain. 
-          She will be an asset for any organisation! 
-          <span>&#8221;</span>
-        </div>
-      </div>
     </section>
 
-    <!-- Recommendation Form -->
-    <section id="contact">
-      <div class="flex_center">
-        <fieldset>
-          <legend class="introduction">Leave a Recommendation</legend>          
-          <input type="text" placeholder="Name (Optional)"> <br/>
-          <textarea id="new_recommendation" cols="500" rows="10" placeholder="Message"></textarea>
-          <div class="flex_center">
-            <button id="recommend_btn" onclick="addRecommendation()">Submit</button>
-          </div>
-        </fieldset>
-      </div>
-    </section>
+    <a href="#" class="home-btn"><i class="fas fa-home"></i></a>
 
-    <div class="iconbutton">
-      <a href="#home">
-        <!--Add the code here for the logo to appear and the icon to be actionable-->
-      </a>
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>¡Gracias por tu recomendación!</h3>
+            <p>Tu recomendación ha sido enviada correctamente y será revisada pronto.</p>
+            <button class="submit-btn" id="closeModalBtn">Aceptar</button>
+        </div>
     </div>
 
-    <div class="popup" id="popup" class="flex_center">
-      <img src="html_finalprojimages/checkmark--outline.svg"/>
-      <h3><!-- Add appropriate text here--></h3>
-      <button onclick="showPopup(false)">Ok</button>
-    </div>
-  </body>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Form submission
+        const recommendationForm = document.getElementById('recommendationForm');
+        const confirmationModal = document.getElementById('confirmationModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const closeModalSpan = document.querySelector('.close-modal');
+        
+        recommendationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Here you would normally send the data to a server
+            // For this example, we'll just show the modal
+            
+            // Reset form
+            recommendationForm.reset();
+            
+            // Show confirmation modal
+            confirmationModal.style.display = 'flex';
+        });
+        
+        // Close modal
+        closeModalBtn.addEventListener('click', function() {
+            confirmationModal.style.display = 'none';
+        });
+        
+        closeModalSpan.addEventListener('click', function() {
+            confirmationModal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', function(e) {
+            if (e.target === confirmationModal) {
+                confirmationModal.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- Agrega esta librería al head -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+// Botón para generar PDF con html2pdf
+const pdfBtn = document.createElement('button');
+pdfBtn.textContent = 'Descargar PDF';
+pdfBtn.style.position = 'fixed';
+pdfBtn.style.bottom = '100px';
+pdfBtn.style.right = '20px';
+pdfBtn.style.zIndex = '1000';
+pdfBtn.style.padding = '10px 15px';
+pdfBtn.style.backgroundColor = '#3498db';
+pdfBtn.style.color = 'white';
+pdfBtn.style.border = 'none';
+pdfBtn.style.borderRadius = '5px';
+pdfBtn.style.cursor = 'pointer';
+
+pdfBtn.addEventListener('click', function() {
+    const element = document.body;
+    const opt = {
+        margin: 10,
+        filename: 'Portafolio_Antonio_Fernandez.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    
+    html2pdf().set(opt).from(element).save();
+});
+
+document.body.appendChild(pdfBtn);
+    </script>
+
+</body>
 </html>
